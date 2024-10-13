@@ -5,7 +5,7 @@ CREATE TABLE
     name VARCHAR(255) NOT NULL,
     parent_category_id INT,
     FOREIGN KEY (parent_category_id) REFERENCES categories (category_id)
-  );
+  ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- usersテーブル
 CREATE TABLE
@@ -18,7 +18,7 @@ CREATE TABLE
     tel VARCHAR(20),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-  );
+  ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- productsテーブル
 CREATE TABLE
@@ -29,11 +29,10 @@ CREATE TABLE
     price INT NOT NULL,
     category_id INT,
     image_url VARCHAR(255),
-    stock INT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES categories (category_id)
-  );
+  ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- ordersテーブル
 CREATE TABLE
@@ -42,9 +41,8 @@ CREATE TABLE
     user_id INT NOT NULL,
     order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     total_price INT NOT NULL,
-    status VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
-  );
+  ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- order_detailsテーブル
 CREATE TABLE
@@ -56,17 +54,4 @@ CREATE TABLE
     price INT NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders (order_id),
     FOREIGN KEY (product_id) REFERENCES products (product_id)
-  );
-
--- reviewsテーブル
-CREATE TABLE
-  reviews (
-    review_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    product_id INT NOT NULL,
-    rating INT NOT NULL,
-    comment TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users (user_id),
-    FOREIGN KEY (product_id) REFERENCES products (product_id)
-  );
+  ) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
